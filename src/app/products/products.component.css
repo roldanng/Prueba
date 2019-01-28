@@ -4,15 +4,7 @@
     padding: 5px;
   }
   
-  .example-table-container {
-    position: relative;
-    max-height: 400px;
-    overflow: auto;
-  }
-  
-  table {
-    width: 100%;
-  }
+
   
   .example-loading-shade {
     position: absolute;
@@ -53,7 +45,14 @@
     background: #424242;
   }
   
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
+
+  .input-search{
+    display: inline;
   }
+
+  .button-search{
+    width: 70%;
+    float: right;
+  }
+
+  

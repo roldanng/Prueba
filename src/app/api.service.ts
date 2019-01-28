@@ -33,9 +33,9 @@ export class ApiService {
   getProducts (): Observable<Product[]> {
     return this.http.get<Product[]>(apiUrl)
       .pipe(
-        tap(heroes => console.log('fetched products')),
+        tap(res => console.log("res",res)),
         catchError(this.handleError('getProducts', []))
-      );
+      )
   }
   
 
