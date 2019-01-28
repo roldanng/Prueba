@@ -3,12 +3,24 @@
          *ngIf="isLoadingResults">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
-    <div class="button-row">
-      <a mat-flat-button color="primary" [routerLink]="['/products']"><mat-icon>list</mat-icon></a>
-    </div>
+
+    
 
     <mat-card class="example-card">
-      
 
+        <div class="button-row">
+            <a mat-flat-button  [routerLink]="['/products']"><mat-icon>arrow_back_ios</mat-icon></a>
+          </div>
+
+      <div class="picture-detail">
+        <img  alt="Image" src={{data.pictures[0].url}}>
+      </div>
+      
+      <div class="detail-detail">
+        {{data.title}} <br/>
+        Precio : $ {{data.price | currency}} {{data.currency_id}} <br/>
+        {{data.seller_address.address_line}}, {{data.seller_address.city.name}} <br/>
+      </div>
+    
     </mat-card>
   </div>

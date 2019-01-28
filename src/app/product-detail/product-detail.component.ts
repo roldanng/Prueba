@@ -10,16 +10,18 @@ import { Product } from '../product';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  data: MatTableDataSource<Product>;
+  data: null;
   isLoadingResults = true;
+
 
   constructor( private route: ActivatedRoute, private api: ApiService, private router: Router ) { }
 
   ngOnInit() {
     this.api.getProductDetail(this.route.snapshot.params['id'])
       .subscribe((res : any) => {
-        this.data = new MatTableDataSource(res.results);
+        this.data = res;
         this.isLoadingResults = false;
+        console.log("res:",res);
       });
 
   }

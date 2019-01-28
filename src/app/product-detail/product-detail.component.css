@@ -20,3 +20,17 @@
   .mat-flat-button {
     margin: 5px;
   }
+
+  .picture-detail{
+  width: 48%;
+  display: inline-block;
+  }
+
+  .picture-detail img{
+   width: 100%;
+  }
+
+  .detail-detail{
+    width: 48%; 
+    float: right;
+  }
