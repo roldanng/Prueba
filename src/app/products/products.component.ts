@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { ApiService } from '../api.service';
 import { Product } from '../product';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -13,7 +14,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 export class ProductsComponent implements OnInit {
 
-  displayedColumns: string[] = ['image','titulo', 'save'];
+  displayedColumns: string[] = ['image','titulo'];
   data: MatTableDataSource<Product>;
   isLoadingResults = true;
 
@@ -25,6 +26,7 @@ export class ProductsComponent implements OnInit {
   /* */
 
   ngOnInit() {
+    /* todo */
     this.api.getProducts()
     .subscribe((res : any) => {
       console.log("res",res);
@@ -38,8 +40,23 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+
+  profileForm = new FormGroup({
+      search: new FormControl(''),
+    });
+
   onSubmit() {
-    console.log('clicked');
+
+    this.api.getProduct(this.profileForm.value.search)
+      .subscribe((res : any) => {
+        this.data = new MatTableDataSource(res.results);
+        this.data.paginator = this.paginator;
+        this.data.sort = this.sort;
+        this.isLoadingResults = false;
+      });
+  
+
+    console.warn(this.profileForm.value.search);
   }
   
   applyFilter(filterValue: string) {

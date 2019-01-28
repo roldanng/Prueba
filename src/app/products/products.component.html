@@ -7,7 +7,7 @@
 
   <div>
 
-    <form  class="example-header"  (ngSubmit)="onSubmit()">
+    <form  [formGroup]="profileForm" class="example-header"  (ngSubmit)="onSubmit()">
     <!-- <div class="filter-header"> 
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -16,13 +16,13 @@
 
     <div class="input-search">
         <mat-form-field >
-            <input  matInput placeholder="Search" value="" >
+            <input type="text" matInput placeholder="Search"  formControlName="search" required >
         </mat-form-field>
         
     </div>
     
     <div class="button-search">
-      <button type="submit" mat-raised-button color="primary" >Search</button>  
+      <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Search</button>  
     </div>
   </form> 
 
@@ -36,28 +36,21 @@
     
       <!-- Product query Column -->
       <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef>Casas</th>
+        <th mat-header-cell *matHeaderCellDef>{{profileForm.value.search | uppercase}}</th>
         <td mat-cell *matCellDef="let row">
-          <img width="50" alt="Angular Logo" src={{row.thumbnail}}>
+          <img width="90" alt="Image" src={{row.thumbnail}}>
         </td>
       </ng-container>
 
       <!-- Product query Column -->
       <ng-container matColumnDef="titulo">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row">
-            <div>{{row.title}}</div>
-            <div>Precio : $ {{row.price}}</div>
+          <td mat-cell *matCellDef="let row" class="top-text">
+            <div class="margin-title">{{row.title}}</div>
+            <div>Precio : $ {{row.price | currency}}</div>
           </td>        
       </ng-container>
 
-      <!-- Product query Column -->
-      <ng-container matColumnDef="save">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row">
-            <div>save</div>
-          </td>        
-      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/product-details/', row.id]"></tr>

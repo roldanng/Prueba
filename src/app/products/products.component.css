@@ -55,4 +55,12 @@
     float: right;
   }
 
-  
+  .top-text {
+    vertical-align: top;
+    padding-left: 1em;
+    
+  }
+
+  .margin-title{
+    margin-bottom: 1em;
+  }

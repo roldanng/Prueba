@@ -8,7 +8,8 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
-const apiUrl = "https://api.mercadolibre.com/sites/MLM/search?q=casa&limit=50&offset=100";
+const apiUrl = "https://api.mercadolibre.com/sites/MLM/search?limit=50&offset=100";
+const apiUrlItem = "https://api.mercadolibre.com/items";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,20 @@ export class ApiService {
       )
   }
   
+  getProduct(q: string): Observable<Product> {
+    const url = `${apiUrl}&q=${q}`;
+    return this.http.get<Product>(url).pipe(
+      tap(_ => console.log(`fetched product q=${q}`)),
+      catchError(this.handleError<Product>(`getProduct q=${q}`))
+    );
+  }
 
+  getProductDetail(id: string): Observable<Product> {
+    const url = `${apiUrlItem}/${id}`;
+    return this.http.get<Product>(url).pipe(
+      tap(_ => console.log(`fetched product q=${id}`)),
+      catchError(this.handleError<Product>(`getProduct q=${id}`))
+    );
+  }
 
 }
